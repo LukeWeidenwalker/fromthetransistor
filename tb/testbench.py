@@ -1,4 +1,3 @@
-import imp
 from pathlib import Path
 from cocotb_test.simulator import run
 
