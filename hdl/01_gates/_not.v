@@ -1,3 +1,3 @@
 module _not(output y, input a);
-    not(y, a);
+    nand(y, a, a);
 endmodule
