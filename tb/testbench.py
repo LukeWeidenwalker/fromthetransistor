@@ -16,7 +16,7 @@ def test_quickstart_examples():
 
 def test_not():
     run(
-        verilog_sources=[hdl_sources_dir / "01_gates/_not.v"],  # sources
+        verilog_sources=[hdl_sources_dir / "01_gates/gates.v"],  # sources
         toplevel="_not",  # top level HDL
         module="tb.01_gates.test_not",  # name of cocotb test module
     )
@@ -24,7 +24,7 @@ def test_not():
 
 def test_and():
     run(
-        verilog_sources=[hdl_sources_dir / "01_gates/_and.v"],  # sources
+        verilog_sources=[hdl_sources_dir / "01_gates/gates.v"],  # sources
         toplevel="_and",  # top level HDL
         module="tb.01_gates.test_and",  # name of cocotb test module
     )
