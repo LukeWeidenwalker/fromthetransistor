@@ -14,9 +14,8 @@ module _or(output y, input a, b);
     wire not_a;
     wire not_b;
 
-    // TODO: switch to own not
-    not(not_a, a);
-    not(not_b, b);
+    _not not_1(not_a, a);
+    _not not_2(not_b, b);
 
     nand(y, not_a, not_b);
 endmodule
