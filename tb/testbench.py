@@ -28,3 +28,10 @@ def test_and():
         toplevel="_and",  # top level HDL
         module="tb.01_gates.test_and",  # name of cocotb test module
     )
+
+def test_or():
+    run(
+        verilog_sources=[hdl_sources_dir / "01_gates/gates.v"],  # sources
+        toplevel="_or",  # top level HDL
+        module="tb.01_gates.test_or",  # name of cocotb test module
+    )
