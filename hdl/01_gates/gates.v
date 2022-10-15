@@ -14,6 +14,7 @@ module _or(output y, input a, b);
     wire not_a;
     wire not_b;
 
+    // TODO: switch to own not
     not(not_a, a);
     not(not_b, b);
 
@@ -28,4 +29,15 @@ module _xor(output y, input a, b);
     nand(nand_1, a, b);
 
     _and and_1(y, or_1, nand_1);
+endmodule
+
+module _mux(output out, input a, b, sel);
+    wire not_sel;
+    wire and_a;
+    wire and_b;
+
+    _not not_1(not_sel, sel);
+    _and and_1(and_a, a, not_sel);
+    _and and_2(and_b, b, sel);
+    _or or_1(out, and_a, and_b);
 endmodule
