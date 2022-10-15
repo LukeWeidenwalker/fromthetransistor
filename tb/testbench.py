@@ -43,9 +43,16 @@ def test_xor():
         module="tb.01_gates.test_xor",  # name of cocotb test module
     )
 
-def test_xor():
+def test_mux():
     run(
         verilog_sources=[hdl_sources_dir / "01_gates/gates.v"],  # sources
         toplevel="_mux",  # top level HDL
         module="tb.01_gates.test_mux",  # name of cocotb test module
+    )
+
+def test_dmux():
+    run(
+        verilog_sources=[hdl_sources_dir / "01_gates/gates.v"],  # sources
+        toplevel="_dmux",  # top level HDL
+        module="tb.01_gates.test_dmux",  # name of cocotb test module
     )

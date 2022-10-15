@@ -40,3 +40,10 @@ module _mux(output out, input a, b, sel);
     _and and_2(and_b, b, sel);
     _or or_1(out, and_a, and_b);
 endmodule
+
+module _dmux(output out_x, out_y, input in_a, sel);
+    wire not_sel;
+    _not not_1(not_sel, sel);
+    _and and_a(out_x, in_a, not_sel);
+    _and and_b(out_y, in_a, sel);
+endmodule
