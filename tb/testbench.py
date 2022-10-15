@@ -56,3 +56,11 @@ def test_dmux():
         toplevel="_dmux",  # top level HDL
         module="tb.01_gates.test_dmux",  # name of cocotb test module
     )
+
+def test_not16():
+    run(
+        verilog_sources=[hdl_sources_dir / "01_gates/gates16.v"],  # sources
+        includes=[hdl_sources_dir / "01_gates"],
+        toplevel="_not16",  # top level HDL
+        module="tb.01_gates.test_not16",  # name of cocotb test module
+    )
