@@ -17,5 +17,5 @@ async def test_and16(dut):
         dut.in_b.value = in_b
 
         await Timer(time=1)
-        # `& 0xFFFF` is to transform this from a signed into an unsigned integer
+
         assert dut.out_y.value == in_a & in_b, f"in_a: {bin(in_a)}, in_b: {bin(in_b)} Expected output: {bin(in_a & in_b)}, actual output: {dut.out_y.value}"

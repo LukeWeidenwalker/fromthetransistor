@@ -47,3 +47,21 @@ module _mux16
         end
     endgenerate
 endmodule
+
+module _or8way
+    (output out_y, input[0:7] in_a);
+    wire a;
+    wire b;
+    wire c;
+    wire d;
+    wire e;
+    wire f;
+
+    _or or_1(a, in_a[0], in_a[1]);
+    _or or_2(b, in_a[2], in_a[3]);
+    _or or_3(c, in_a[4], in_a[5]);
+    _or or_4(d, in_a[6], in_a[7]);
+    _or or_5(e, a, b);
+    _or or_6(f, c, d);
+    _or or_7(out_y, e, f);
+endmodule

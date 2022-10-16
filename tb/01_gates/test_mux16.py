@@ -20,5 +20,5 @@ async def test_mux16(dut):
 
         await Timer(time=1)
         expected_output = in_b if sel else in_a
-        # `& 0xFFFF` is to transform this from a signed into an unsigned integer
+
         assert dut.out_y.value == expected_output, f"in_a: {bin(in_a)}, in_b: {bin(in_b)} Expected output: {bin(expected_output)}, actual output: {dut.out_y.value}"
