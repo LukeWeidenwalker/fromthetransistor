@@ -64,3 +64,11 @@ def test_not16():
         toplevel="_not16",  # top level HDL
         module="tb.01_gates.test_not16",  # name of cocotb test module
     )
+
+def test_and16():
+    run(
+        verilog_sources=[hdl_sources_dir / "01_gates/gates16.v"],  # sources
+        includes=[hdl_sources_dir / "01_gates"],
+        toplevel="_and16",  # top level HDL
+        module="tb.01_gates.test_and16",  # name of cocotb test module
+    )
