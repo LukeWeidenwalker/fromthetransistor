@@ -65,3 +65,15 @@ module _or8way
     _or or_6(f, c, d);
     _or or_7(out_y, e, f);
 endmodule
+
+module _mux4way16
+    (output[0:15] out_y, input[0:15] in_a, in_b, in_c, in_d, input[0:1] sel);
+    wire[0:15] first_mux16;
+    wire[0:15] second_mux16;
+
+    // This is different to the book, because using `input[0:1]` means that the most
+    // significant bit will be in sel[0], not in sel[1].
+    _mux16 mux16_ab(first_mux16, in_a, in_b, sel[1]);
+    _mux16 mux16_cd(second_mux16, in_c, in_d, sel[1]);
+    _mux16 mux16_out(out_y, first_mux16, second_mux16, sel[0]);
+endmodule

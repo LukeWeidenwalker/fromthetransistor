@@ -19,6 +19,6 @@ async def test_mux16(dut):
         dut.sel.value = sel
 
         await Timer(time=1)
-        expected_output = in_b if sel else in_a
+        expected_output = in_a if sel==0 else in_b
 
         assert dut.out_y.value == expected_output, f"in_a: {bin(in_a)}, in_b: {bin(in_b)} Expected output: {bin(expected_output)}, actual output: {dut.out_y.value}"
