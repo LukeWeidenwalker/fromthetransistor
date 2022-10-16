@@ -72,3 +72,12 @@ def test_and16():
         toplevel="_and16",  # top level HDL
         module="tb.01_gates.test_and16",  # name of cocotb test module
     )
+
+
+def test_or16():
+    run(
+        verilog_sources=[hdl_sources_dir / "01_gates/gates16.v"],  # sources
+        includes=[hdl_sources_dir / "01_gates"],
+        toplevel="_or16",  # top level HDL
+        module="tb.01_gates.test_or16",  # name of cocotb test module
+    )
