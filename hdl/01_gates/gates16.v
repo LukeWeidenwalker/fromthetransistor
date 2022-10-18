@@ -77,3 +77,23 @@ module _mux4way16
     _mux16 mux16_cd(second_mux16, in_c, in_d, sel[1]);
     _mux16 mux16_out(out_y, first_mux16, second_mux16, sel[0]);
 endmodule
+
+module _mux8way16
+    (output[0:15] out_y, input[0:15] in_a, in_b, in_c, in_d, in_e, in_f, in_g, in_h, input[0:2] sel);
+    wire[0:15] mux16_0;
+    wire[0:15] mux16_1;
+    wire[0:15] mux16_2;
+    wire[0:15] mux16_3;
+    wire[0:15] mux16_4;
+    wire[0:15] mux16_5;
+
+    // This is different to the book, because using `input[0:1]` means that the most
+    // significant bit will be in sel[0], not in sel[1].
+    _mux16 mux16_ab(mux16_0, in_a, in_b, sel[2]);
+    _mux16 mux16_cd(mux16_1, in_c, in_d, sel[2]);
+    _mux16 mux16_ef(mux16_2, in_e, in_f, sel[2]);
+    _mux16 mux16_gh(mux16_3, in_g, in_h, sel[2]);
+    _mux16 mux16_abcd(mux16_4, mux16_0, mux16_1, sel[1]);
+    _mux16 mux16_efgh(mux16_5, mux16_2, mux16_3, sel[1]);
+    _mux16 mux16_out(out_y, mux16_4, mux16_5, sel[0]);
+endmodule
