@@ -97,3 +97,41 @@ module _mux8way16
     _mux16 mux16_efgh(mux16_5, mux16_2, mux16_3, sel[1]);
     _mux16 mux16_out(out_y, mux16_4, mux16_5, sel[0]);
 endmodule
+
+
+module _dmux4way
+    (output out_a, out_b, out_c, out_d, input in_, input[0:1] sel);
+
+    wire sel_ab;
+    wire sel_cd;
+
+    wire sel_a_first;
+    wire sel_b_first;
+    wire sel_c_first;
+    wire sel_d_first;
+
+    wire sel_a;
+    wire sel_b;
+    wire sel_c;
+    wire sel_d;
+
+    assign sel_cd = sel[0];
+    _not not_0(sel_ab, sel[0]);
+
+    assign sel_b_first = sel[1];
+    _not not_1(sel_a_first, sel[1]);
+    assign sel_d_first = sel[1];
+    _not not_2(sel_c_first, sel[1]);
+
+    _and and_0(sel_a, sel_a_first, sel_ab);
+    _and and_1(sel_b, sel_b_first, sel_ab);
+    _and and_2(sel_c, sel_c_first, sel_cd);
+    _and and_3(sel_d, sel_d_first, sel_cd);
+
+    _and and_4(out_a, sel_a, in_);
+    _and and_5(out_b, sel_b, in_);
+    _and and_6(out_c, sel_c, in_);
+    _and and_7(out_d, sel_d, in_);
+
+endmodule
+

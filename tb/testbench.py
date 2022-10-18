@@ -112,3 +112,11 @@ def test_mux8way16():
         toplevel="_mux8way16",  # top level HDL
         module="tb.01_gates.test_mux8way16",  # name of cocotb test module
     )
+
+def test_dmux4way():
+    run(
+        verilog_sources=[hdl_sources_dir / "01_gates/gates16.v"],  # sources
+        includes=[hdl_sources_dir / "01_gates"],
+        toplevel="_dmux4way",  # top level HDL
+        module="tb.01_gates.test_dmux4way",  # name of cocotb test module
+    )
