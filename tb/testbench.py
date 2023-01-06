@@ -129,3 +129,10 @@ def test_half_adder():
         module="tb.02_boolean_arithmetic.test_half_adder",  # name of cocotb test module
     )
 
+def test_full_adder():
+    run(
+        verilog_sources=[hdl_sources_dir / "02_boolean_arithmetic/full_adder.v"],  # sources
+        includes=[hdl_sources_dir / "02_boolean_arithmetic"],
+        toplevel="full_adder",  # top level HDL
+        module="tb.02_boolean_arithmetic.test_full_adder",  # name of cocotb test module
+    )
