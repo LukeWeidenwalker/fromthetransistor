@@ -120,3 +120,12 @@ def test_dmux4way():
         toplevel="_dmux4way",  # top level HDL
         module="tb.01_gates.test_dmux4way",  # name of cocotb test module
     )
+
+def test_half_adder():
+    run(
+        verilog_sources=[hdl_sources_dir / "02_boolean_arithmetic/half_adder.v"],  # sources
+        includes=[hdl_sources_dir / "02_boolean_arithmetic"],
+        toplevel="half_adder",  # top level HDL
+        module="tb.02_boolean_arithmetic.test_half_adder",  # name of cocotb test module
+    )
+
