@@ -145,3 +145,12 @@ def test_add16():
         toplevel="add16",  # top level HDL
         module="tb.02_boolean_arithmetic.test_add16",  # name of cocotb test module
     )
+
+
+def test_inc16():
+    run(
+        verilog_sources=[hdl_sources_dir / "02_boolean_arithmetic/inc16.v"],  # sources
+        includes=[hdl_sources_dir / "02_boolean_arithmetic"],
+        toplevel="inc16",  # top level HDL
+        module="tb.02_boolean_arithmetic.test_inc16",  # name of cocotb test module
+    )

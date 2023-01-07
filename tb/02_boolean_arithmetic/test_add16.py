@@ -1,9 +1,6 @@
 from random import randint
 import cocotb
 from cocotb.triggers import Timer
-from cocotb.binary import BinaryValue
-
-from collections import namedtuple
 
 
 @cocotb.test()
