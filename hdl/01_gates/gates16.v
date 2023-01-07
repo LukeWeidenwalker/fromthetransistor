@@ -37,6 +37,8 @@ module _or16
 endmodule
 
 module _mux16
+    // If (sel==0) then for i = 0..15 out[i] = a[i],
+    // else for i - 0..15 out[i] = b[i]
     #(parameter N = 16)
     (output[0:15] out_y, input[0:15] in_a, in_b, input sel);
 

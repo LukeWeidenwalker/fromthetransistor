@@ -142,7 +142,7 @@ def test_add16():
     run(
         verilog_sources=[hdl_sources_dir / "02_boolean_arithmetic/add16.v"],  # sources
         includes=[hdl_sources_dir / "02_boolean_arithmetic"],
-        toplevel="add16",  # top level HDL
+        toplevel="_add16",  # top level HDL
         module="tb.02_boolean_arithmetic.test_add16",  # name of cocotb test module
     )
 
@@ -153,4 +153,12 @@ def test_inc16():
         includes=[hdl_sources_dir / "02_boolean_arithmetic"],
         toplevel="inc16",  # top level HDL
         module="tb.02_boolean_arithmetic.test_inc16",  # name of cocotb test module
+    )
+
+def test_alu():
+    run(
+        verilog_sources=[hdl_sources_dir / "02_boolean_arithmetic/alu.v"],  # sources
+        includes=[hdl_sources_dir / "02_boolean_arithmetic", hdl_sources_dir / "01_gates"],
+        toplevel="alu",  # top level HDL
+        module="tb.02_boolean_arithmetic.test_alu",  # name of cocotb test module
     )

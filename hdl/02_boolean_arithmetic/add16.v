@@ -1,6 +1,6 @@
 `include "full_adder.v"
 
-module add16
+module _add16
     (output[0:15] out, input[0:15] a, b);
     
     wire[0:15] carries; 
