@@ -4,9 +4,28 @@ from cocotb.triggers import Timer
 
 from collections import namedtuple
 
-configRow = namedtuple("configRow", ["zx", "nx", "zy", "ny", "f", "no", "zr", "ng", "out"])
+configRow = namedtuple("configRow", ["zx", "nx", "zy", "ny", "f", "no", "out"])
 
-row1 = configRow(1, 0, 1, 0, 1, 0, 1, 0, lambda x, y: 0)
+test_configs = [
+    configRow(1, 0, 1, 0, 1, 0, lambda x, y: 0),
+    configRow(1, 1, 1, 1, 1, 1, lambda x, y: 1),
+    configRow(1, 1, 1, 0, 1, 0, lambda x, y: -1),
+    configRow(0, 0, 1, 1, 0, 0, lambda x, y: x),
+    configRow(1, 1, 0, 0, 0, 0, lambda x, y: y),
+    configRow(0, 0, 1, 1, 0, 1, lambda x, y: ~x),
+    configRow(1, 1, 0, 0, 0, 1, lambda x, y: +y),
+    configRow(0, 0, 1, 1, 1, 1, lambda x, y: -x),
+    configRow(1, 1, 0, 0, 1, 1, lambda x, y: -y),
+    configRow(0, 1, 1, 1, 1, 1, lambda x, y: x+1),
+    configRow(1, 1, 0, 1, 1, 1, lambda x, y: y+1),
+    configRow(0, 0, 1, 1, 1, 0, lambda x, y: x-1),
+    configRow(1, 1, 0, 0, 1, 0, lambda x, y: y-1),
+    configRow(0, 0, 0, 0, 1, 0, lambda x, y: x+y),
+    configRow(0, 1, 0, 0, 1, 1, lambda x, y: x-y),
+    configRow(0, 0, 0, 1, 1, 1, lambda x, y: y-x),
+    configRow(0, 0, 0, 0, 0, 0, lambda x, y: x&y),
+    configRow(0, 1, 0, 1, 0, 1, lambda x, y: x|y)
+]
 
 @cocotb.test()
 async def test_alu(dut):
@@ -14,20 +33,27 @@ async def test_alu(dut):
         in_x = randint(0, 0xFFFF)
         in_y = randint(0, 0xFFFF)
 
-        await Timer(time=1)
-        dut.x.value = in_x
-        dut.y.value = in_y
-        dut.zx.value = row1.zx
-        dut.nx.value = row1.nx
-        dut.zy.value = row1.zy
-        dut.ny.value = row1.ny
-        dut.f.value = row1.f
-        dut.no.value = row1.no
-        
-        await Timer(time=1)
+        for i, row in enumerate(test_configs):
+            await Timer(time=1)
+            dut.x.value = in_x
+            dut.y.value = in_y
+            dut.zx.value = row.zx
+            dut.nx.value = row.nx
+            dut.zy.value = row.zy
+            dut.ny.value = row.ny
+            dut.f.value = row.f
+            dut.no.value = row.no
+            
+            await Timer(time=1)
 
-        actual_value = dut.out.value
+            actual_value = dut.out.value
 
-        expected_value = int(bin(row1.out(in_x, in_y))[2:].zfill(16)[-16:], 2)
-        assert actual_value == expected_value, f"in_a: {bin(in_x)}, in_b: {bin(in_y)} Expected output: {expected_value}, actual output: {actual_value}, type_expected: {type(expected_value)}, type_Actual: {type(actual_value)}"
-        
+            expected_value = int(bin(row.out(in_x, in_y))[2:].zfill(16)[-16:], 2)
+            assert actual_value == expected_value, f"Test {i}: in_a: {bin(in_x)}, \n\
+                in_b: {bin(in_y)} \n\
+                Expected output: {expected_value}, \n\
+                actual output: {actual_value}, \n\
+                type_expected: {type(expected_value)}, \n\
+                type_Actual: {type(actual_value)}"
+
+            
