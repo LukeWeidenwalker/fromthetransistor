@@ -1,7 +1,6 @@
 from random import randint
 import cocotb
 from cocotb.triggers import Timer
-from cocotb.binary import BinaryValue, BinaryRepresentation
 from collections import namedtuple
 
 configRow = namedtuple("configRow", ["zx", "nx", "zy", "ny", "f", "no", "out"])
@@ -13,7 +12,7 @@ test_configs = [
     configRow(0, 0, 1, 1, 0, 0, lambda x, y: x),
     configRow(1, 1, 0, 0, 0, 0, lambda x, y: y),
     configRow(0, 0, 1, 1, 0, 1, lambda x, y: ~x),
-    configRow(1, 1, 0, 0, 0, 1, lambda x, y: +y),
+    configRow(1, 1, 0, 0, 0, 1, lambda x, y: ~y),
     configRow(0, 0, 1, 1, 1, 1, lambda x, y: -x),
     configRow(1, 1, 0, 0, 1, 1, lambda x, y: -y),
     configRow(0, 1, 1, 1, 1, 1, lambda x, y: x+1),
@@ -34,7 +33,6 @@ async def test_alu(dut):
         in_y = randint(0, 0xFFFF)
 
         for i, row in enumerate(test_configs):
-            print(f"Now running test {i}")
             await Timer(time=1)
             dut.x.value = in_x
             dut.y.value = in_y
